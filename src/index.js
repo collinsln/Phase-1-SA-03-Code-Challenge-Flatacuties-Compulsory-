@@ -31,40 +31,33 @@ characterBar.addEventListener('click', async (event) => {
   detailedInfo.innerHTML = `
     <h2>${character.name}</h2>
     <img src="${character.image}" alt="${character.name}">
-    <p>${character.description}</p>
+    <p>${character.id}</p>
   `;
-});
+})
 
 const votesForm = document.querySelector('#votes-form');
-
+const detailedInfo2 = document.querySelector('#detailedInfo2');
 
 votesForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
   // Get the number of votes from the input field.
   const numberOfVotes = Number(votesForm.querySelector('input').value);
+  console.log(numberOfVotes);
 
   // Get the character's details from the `detailed-info` element.
-  const characterName = detailedInfo.querySelector('h2').textContent;
+  const characterName = detailedInfo2.querySelector('h4');
+  console.log(characterName);
 
   // Add the number of votes to the character's details.
   const characterDetails = {
     name: characterName,
-    votes: numberOfVotes + (characterDetails?.votes ?? 0),
+    votes: numberOfVotes,
   };
-
+console.log(characterDetails);
   // Display the updated character details in the `detailed-info` element.
-  detailedInfo.innerHTML = `
-    <h2>${characterDetails.name}</h2>
-    <p>${characterDetails.votes} votes</p>
+  detailedInfo2.innerHTML = `
+   
+    <p>${characterDetails.votes}votes</p>
   `;
-});
-// Create an image element for each character.
-characters.forEach((character) => {
-  const img = document.createElement('img');
-  img.src = character.image;
-  img.alt = character.name;
-
-  // Append the image element to the `characterBar` element.
-  document.querySelector('#character-bar').appendChild(img);
 });
